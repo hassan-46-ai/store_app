@@ -3,7 +3,7 @@ class ProductCard extends StatelessWidget {
   const ProductCard({Key? key, required this.productname, required this.productprice, required this.productdetails, required this.productpic}) : super(key: key);
 final String productname;
 final String productdetails;
-final double productprice;
+final num productprice;
 final String productpic;
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ final String productpic;
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
-              productdetails,
+              productdetails.substring(0,50),
               style: TextStyle(),
             ),
           ),
