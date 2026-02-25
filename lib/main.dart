@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:store/features/login/views/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:store/core/routing/app_route.dart';
+import 'package:store/core/routing/routes.dart';
 
 import 'home.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
 
-  // This widget is the root of your application.
+  const MyApp({super.key, required this.isLoggedIn});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home:  Home(),
+      initialRoute:
+      isLoggedIn ? Routes.homeScreen : Routes.loginScreen,
+      onGenerateRoute: AppRoute().generateRoute,
     );
   }
 }

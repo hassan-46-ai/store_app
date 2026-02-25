@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/features/login/cubit/login_cubit.dart';
 import 'package:store/features/login/cubit/login_states.dart';
 
+import '../../../core/routing/routes.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
@@ -31,6 +32,7 @@ class LoginScreen extends StatelessWidget {
                     content: Text("Login Successful "),
                   ),
                 );
+                Navigator.pushReplacementNamed(context, Routes.homeScreen);
 
 
               }
